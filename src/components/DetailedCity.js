@@ -11,22 +11,22 @@ const DetailedCity = ({id, applicable_date, weather_state_name, wind_direction, 
       Weather: {weather_state_name}
     </td>
     <td className="detailedCity__single__element">
-      Wind: {wind_direction.toFixed(1)}
+      Wind: {wind_direction.toFixed(1)}°
     </td>
     <td className="detailedCity__single__element">
       Wind direction: {wind_direction_compass}
     </td>
     <td className="detailedCity__single__element">
-      Wind speed: {wind_speed.toFixed(1)}
+      Wind speed: {wind_speed.toFixed(1)}m/s
     </td>
     <td className="detailedCity__single__element">
-      Min temp: {min_temp.toFixed(1)}
+      Min temp: {min_temp.toFixed(1)}°C
     </td>
     <td className="detailedCity__single__element">
-      Temp: {the_temp.toFixed(1)}
+      Temp: {the_temp.toFixed(1)}°C
     </td>
     <td className="detailedCity__single__element">
-      Max temp: {max_temp.toFixed(1)}
+      Max temp: {max_temp.toFixed(1)}°C
     </td>
   </tr>
   </div>;

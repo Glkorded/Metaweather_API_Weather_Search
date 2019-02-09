@@ -3,6 +3,7 @@ import SingleCitySearch from "./SingleCitySearch";
 import {Route, Switch} from "react-router-dom";
 import Navigation from './Navigation'
 import DetailedCitySearch from "./DetailedCitySearch";
+import Favourites from "./Favourites"
 
 class App extends React.Component {
 
@@ -17,7 +18,7 @@ class App extends React.Component {
             />
           <Route
             path="/favourites/"
-            //exact component={SingleCitySearch}
+            exact component={Favourites}
           />
           <Route
             path="/detailed_search/:cityId"
