@@ -16,10 +16,19 @@ class Favourites extends React.Component {
       searchTitle: e.target.value,
     });
   };
-  componentDidMount() {
-    if (JSON.parse(localStorage.getItem('favouriteData')) !== null) {
-    this.setState({data: JSON.parse(localStorage.getItem('favouriteData'))});
-  }}
+
+  componentDidMount(){
+    if (JSON.parse(localStorage.getItem('favouriteData')) !== null)
+    {
+      this.setState({
+        data: JSON.parse(localStorage.getItem('favouriteData'))
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    localStorage.setItem('favouriteData', JSON.stringify(this.state.data));
+  }
 
   render() {
     return (
@@ -31,19 +40,26 @@ class Favourites extends React.Component {
           Click on the link to see detailed information.
         </h2>
         <input onChange={this.handleChange}/>
-        <button onClick={() => console.log(this.state.favourited)}>Show favourites</button>
+        <button onClick={() => console.log(this.state.data)}>Show data</button>
         <div>
-          {this.state.data.map((single) =>
+          {this.state.data.map((single, index) =>
             <div key = {single.woeid}>
+              <Link to={`../detailed_search/${single.woeid}`}>{single.title}</Link>
               <SingleCity
                 key = {single.woeid}
                 title = {single.title}
                 location_type={single.location_type}
                 woeid={single.woeid}
                 latt_long={single.latt_long}
-                handleFavourite={() => {localStorage.removeItem('favouriteData')}}
+                buttonName="Unfavourite me!"
+                handleFavourite={() => {
+                  const semiData = this.state.data.slice();
+                  semiData.splice(index, 1);
+                  this.setState({
+                    data: semiData
+                 });
+                }}
               />
-              <Link to={`../detailed_search/${single.woeid}`}>{single.title}</Link>
             </div>
           )}
         </div>

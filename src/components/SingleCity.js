@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 class SingleCity extends Component {
 
   render() {
-    const { title, location_type, woeid, latt_long, handleFavourite } = this.props;
+    const { title, location_type, woeid, latt_long, handleFavourite, buttonName } = this.props;
     return (
       <div>
         <div>
@@ -19,7 +19,7 @@ class SingleCity extends Component {
           Latt_long: {latt_long}
         </div>
         <div>
-          <button onClick={handleFavourite}>Favourite me!</button>
+          <button onClick={handleFavourite}>{buttonName}</button>
         </div>
       </div>
   )
