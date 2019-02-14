@@ -7,7 +7,7 @@ const Navigation = () =>
     <nav className="footer">
       <ul className="navigation_list">
         <li className="navigation_list_element">
-          <Link className="navigation_list_element_link" to="/search/">Search</Link>
+          <Link className="navigation_list_element_link" to="/">Search</Link>
         </li>
         <li className="navigation_list_element">
           <Link className="navigation_list_element_link" to="/favourites/">Favourites</Link>

@@ -13,7 +13,7 @@ class App extends React.Component {
         <Navigation/>
         <Switch>
           <Route
-            path="/search/"
+            path="/"
             exact component={SingleCitySearch}
             />
           <Route

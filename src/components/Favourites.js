@@ -11,12 +11,7 @@ class Favourites extends React.Component {
     }
   }
 
-  handleChange = e => {
-    this.setState({
-      searchTitle: e.target.value,
-    });
-  };
-
+  /*Here I parse the localStorage*/
   componentDidMount(){
     if (JSON.parse(localStorage.getItem('favouriteData')) !== null)
     {
@@ -26,9 +21,28 @@ class Favourites extends React.Component {
     }
   }
 
+  /*I do so to rewrite localStorage when I unfavourite some of cities in favourite*/
   componentWillUnmount() {
     localStorage.setItem('favouriteData', JSON.stringify(this.state.data));
   }
+
+  /*input handling*/
+  handleChange = e => {
+    this.setState({
+      searchTitle: e.target.value,
+    });
+  };
+
+  /*filter func*/
+  filterFunction = (elem) => {
+    if (this.state.searchTitle !== "") {
+      if (elem.title.toLowerCase().includes(this.state.searchTitle.toLowerCase())) {
+        return true
+      }
+    } else {
+      return elem.title
+    }
+  };
 
   render() {
     return (
@@ -40,9 +54,8 @@ class Favourites extends React.Component {
           Click on the link to see detailed information.
         </h2>
         <input onChange={this.handleChange}/>
-        <button onClick={() => console.log(this.state.data)}>Show data</button>
         <div>
-          {this.state.data.map((single, index) =>
+          {this.state.data.filter(this.filterFunction).map((single, index) =>
             <div key = {single.woeid}>
               <Link to={`../detailed_search/${single.woeid}`}>{single.title}</Link>
               <SingleCity
@@ -57,7 +70,7 @@ class Favourites extends React.Component {
                   semiData.splice(index, 1);
                   this.setState({
                     data: semiData
-                 });
+                  });
                 }}
               />
             </div>
