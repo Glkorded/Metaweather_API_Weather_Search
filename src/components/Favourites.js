@@ -65,6 +65,7 @@ class Favourites extends React.Component {
                 woeid={single.woeid}
                 latt_long={single.latt_long}
                 buttonName="Unfavourite me!"
+                buttonDisabled={false}
                 handleFavourite={() => {
                   const semiData = this.state.data.slice();
                   semiData.splice(index, 1);

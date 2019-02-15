@@ -41,6 +41,8 @@ class SingleCitySearch extends React.Component {
   })
   }
 
+disabledCheckFunc = (elem) => {return this.state.favourited.map((e) => e.woeid).some((el) => el === elem)}
+
   fetchMethod = debounce(() => {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'https://www.metaweather.com/api';
@@ -65,6 +67,7 @@ class SingleCitySearch extends React.Component {
   }, 500);
 
   render() {
+    console.log("Check function is " + this.disabledCheckFunc(1));
     console.log("Must fetch status is " + this.state.mustFetch);
     return (
       <div>
@@ -83,10 +86,11 @@ class SingleCitySearch extends React.Component {
               <SingleCity
               key = {single.woeid}
               title = {single.title}
-              location_type={single.location_type}
-              woeid={single.woeid}
-              latt_long={single.latt_long}
-              buttonName="Favourite me!"
+              location_type = {single.location_type}
+              woeid = {single.woeid}
+              latt_long = {single.latt_long}
+              buttonName = "Favourite me!"
+              buttonDisabled={this.disabledCheckFunc(single.woeid)}
               handleFavourite={() => {
                 this.state.favourited.push(single);
                 localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited));
