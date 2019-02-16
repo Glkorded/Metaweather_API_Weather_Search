@@ -9,19 +9,20 @@ class SingleCitySearch extends React.Component {
     }
   }
 
-  /*We gather the data via Router on component mounting*/
-  componentDidMount()
-  {
+  fetchMethod = () => async() => {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'https://www.metaweather.com/api';
-    fetch(`${proxy}${url}/location/${this.props.match.params.cityId}`)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-      })
-      .then(detailedData => this.setState({detailedData: detailedData.consolidated_weather})) //Here we gather only "consolidated_weather", originally, set of objects from API has a lot more things
-      .catch(error => error);
+    try {
+      const response = await fetch(`${proxy}${url}/location/${this.props.match.params.cityId}`);
+      const data = await response.json();
+      this.setState({detailedData: data.consolidated_weather}) //Here we gather only "consolidated_weather", originally, set of objects from API has a lot more things
+    }
+    catch(error) {console.log('Error is ' + error)}
+  };
+
+  /*We gather the data via Router on component mounting*/
+  componentDidMount() {
+    this.fetchMethod()
   }
 
   render() {

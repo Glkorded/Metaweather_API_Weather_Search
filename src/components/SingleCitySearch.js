@@ -46,26 +46,20 @@ class SingleCitySearch extends React.Component {
   disabledCheckFunc = elem => {if (this.state.favourited !== null) {return this.state.favourited.map(e => e.woeid).some(el => el === elem)}}; //Function to check whether city is favourited
 
   /*Fetching method*/
-  fetchMethod = debounce(() => {
+  fetchMethod = debounce(async () => {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'https://www.metaweather.com/api';
-    if (this.state.mustFetch) {   //Here we use above-mentioned mustFetch to prevent constant re-fetching
+    if (this.state.mustFetch) { //Here we use above-mentioned mustFetch to prevent constant re-fetching
       console.log("Debounce started...");
-      fetch(`${proxy}${url}/location/search/?query=${this.state.searchTitle}`)
-        .then(response => {
-          if (response.ok) {
-            console.log("Response got...");
-            return response.json();
-          }
-        })
-        .then(data => {
-            if (data !== undefined) {
-              console.log("Data got...");
-              this.setNewData(data)
-            }
-          }
-        )
-        .catch(error => error);
+      try {
+        const response = await fetch(`${proxy}${url}/location/search/?query=${this.state.searchTitle}`);
+        const data = await response.json();
+        if (data !== undefined) {
+          console.log("Data got...");
+          this.setNewData(data)
+        }
+      }
+      catch(error) {console.log('Error is ' + error)}
     }
   }, 500);
 
@@ -93,7 +87,7 @@ class SingleCitySearch extends React.Component {
                 buttonName = "Favourite me!"
                 buttonDisabled={this.disabledCheckFunc(single.woeid)}
                 handleFavourite={() => {
-                  this.state.favourited.push(single); //Here we set inner state favourites
+                  this.state.favourited.push(single);
                   localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited)); //Here we set favourites to localStorage
                   this.setState({mustFetch: true});   //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
                 }}
