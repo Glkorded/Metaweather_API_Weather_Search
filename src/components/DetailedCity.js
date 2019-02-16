@@ -1,34 +1,45 @@
 import React from 'react'
 import './detailedcity.css'
 
-const DetailedCity = ({id, applicable_date, weather_state_name, wind_direction, wind_direction_compass, wind_speed, min_temp, the_temp, max_temp} ) =>
-  <div className="detailedCity__single">
-  <tr>
-    <td className="detailedCity__single__element">
+const DetailedCity = (
+  {id,
+    applicable_date,
+    weather_state_name,
+    wind_direction,
+    wind_direction_compass,
+    wind_speed,
+    min_temp,
+    the_temp,
+    max_temp
+  }
+) =>
+  <tbody className="detailedCity__single">          {/*Whole component*/}
+  <tr>                                              {/*Table row*/}
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Date: {applicable_date}
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Weather: {weather_state_name}
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Wind: {wind_direction.toFixed(1)}°
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Wind direction: {wind_direction_compass}
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Wind speed: {wind_speed.toFixed(1)}m/s
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Min temp: {min_temp.toFixed(1)}°C
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Temp: {the_temp.toFixed(1)}°C
     </td>
-    <td className="detailedCity__single__element">
+    <td className="detailedCity__single__element">  {/*Table single element data*/}
       Max temp: {max_temp.toFixed(1)}°C
     </td>
   </tr>
-  </div>;
+  </tbody>;
 
 export default DetailedCity

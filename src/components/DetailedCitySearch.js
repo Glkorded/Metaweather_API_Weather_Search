@@ -9,6 +9,7 @@ class SingleCitySearch extends React.Component {
     }
   }
 
+  /*We gather the data via Router on component mounting*/
   componentDidMount()
   {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -19,7 +20,7 @@ class SingleCitySearch extends React.Component {
           return response.json()
         }
       })
-      .then(detailedData => this.setState({detailedData: detailedData.consolidated_weather}))
+      .then(detailedData => this.setState({detailedData: detailedData.consolidated_weather})) //Here we gather only "consolidated_weather", originally, set of objects from API has a lot more things
       .catch(error => error);
   }
 
@@ -27,7 +28,7 @@ class SingleCitySearch extends React.Component {
     return (
       <div>
         <table className="detailedCity__whole">
-          {this.state.detailedData.map((detailed) =>
+          {this.state.detailedData.map((detailed) =>  //Mapping through gathered data
             <DetailedCity
               key = {detailed.id}
               applicable_date = {detailed.applicable_date}

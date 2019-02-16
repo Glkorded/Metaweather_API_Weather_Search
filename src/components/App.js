@@ -5,10 +5,7 @@ import Navigation from './Navigation'
 import DetailedCitySearch from "./DetailedCitySearch";
 import Favourites from "./Favourites"
 
-class App extends React.Component {
-
-  render() {
-    return (
+const App = () =>
       <div>
         <Navigation/>
         <Switch>
@@ -25,9 +22,6 @@ class App extends React.Component {
             exact component={DetailedCitySearch}
           />
         </Switch>
-      </div>
-    )
-  }
-}
+      </div>;
 
 export default App;

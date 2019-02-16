@@ -1,3 +1,5 @@
+/*Just a simple debouncer*/
+
 export const debounce = (f, ms) => {
   let timer = null;
   return function (...args) {

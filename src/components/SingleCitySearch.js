@@ -7,13 +7,14 @@ class SingleCitySearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      favourited: [],
-      searchTitle: '',
-      mustFetch: false,
+      data: [],           //Main data
+      favourited: [],     //Favourited cities data
+      searchTitle: '',    //State for input
+      mustFetch: false,   //Special boolean for comfortable fetching
     }
   }
 
+  /*Handling the input*/
   handleChange = e => {
     this.setState({
       searchTitle: e.target.value,
@@ -21,7 +22,7 @@ class SingleCitySearch extends React.Component {
     if (this.state.mustFetch !== true) { //We divide this.setState to prevent setting mustFetch to true on every change in input
       console.log("Must fetch status changed");
       this.setState({
-        mustFetch: true
+        mustFetch: true                  //Here we change mustFetch status to enable fetching
       });
     }
     this.fetchMethod()
@@ -30,23 +31,25 @@ class SingleCitySearch extends React.Component {
   setNewData(data) {
     this.setState({
       data: data,
-      mustFetch: false
+      mustFetch: false                    //Here we change mustFetch to false to prevent constant re-fetching
     });
     console.log("New data set...")
   }
 
+  //We do so to gather new set of favourites because some of them may be deleted in Favourites section
   componentDidMount(){
-  this.setState({
-    favourited: JSON.parse(localStorage.getItem('favouriteData'))
-  })
+    this.setState({
+      favourited: JSON.parse(localStorage.getItem('favouriteData'))
+    })
   }
 
-disabledCheckFunc = (elem) => {return this.state.favourited.map((e) => e.woeid).some((el) => el === elem)}
+  disabledCheckFunc = elem => this.state.favourited.map(e => e.woeid).some(el => el === elem); //Function to check whether city is favourited
 
+  /*Fetching method*/
   fetchMethod = debounce(() => {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'https://www.metaweather.com/api';
-    if (this.state.mustFetch) {
+    if (this.state.mustFetch) {   //Here we use above-mentioned mustFetch to prevent constant re-fetching
       console.log("Debounce started...");
       fetch(`${proxy}${url}/location/search/?query=${this.state.searchTitle}`)
         .then(response => {
@@ -67,7 +70,6 @@ disabledCheckFunc = (elem) => {return this.state.favourited.map((e) => e.woeid).
   }, 500);
 
   render() {
-    console.log("Check function is " + this.disabledCheckFunc(1));
     console.log("Must fetch status is " + this.state.mustFetch);
     return (
       <div>
@@ -84,18 +86,19 @@ disabledCheckFunc = (elem) => {return this.state.favourited.map((e) => e.woeid).
             <div key = {single.woeid}>
               <Link to={`../detailed_search/${single.woeid}`}>{single.title}</Link>
               <SingleCity
-              key = {single.woeid}
-              title = {single.title}
-              location_type = {single.location_type}
-              woeid = {single.woeid}
-              latt_long = {single.latt_long}
-              buttonName = "Favourite me!"
-              buttonDisabled={this.disabledCheckFunc(single.woeid)}
-              handleFavourite={() => {
-                this.state.favourited.push(single);
-                localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited));
-              }}
-            />
+                key = {single.woeid}
+                title = {single.title}
+                location_type = {single.location_type}
+                woeid = {single.woeid}
+                latt_long = {single.latt_long}
+                buttonName = "Favourite me!"
+                buttonDisabled={this.disabledCheckFunc(single.woeid)}
+                handleFavourite={() => {
+                  this.state.favourited.push(single); //Here we set inner state favourites
+                  localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited)); //Here we set favourites to localStorage
+                  this.setState({mustFetch: true});   //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
+                }}
+              />
             </div>
           )}
         </div>
@@ -104,4 +107,4 @@ disabledCheckFunc = (elem) => {return this.state.favourited.map((e) => e.woeid).
   }
 }
 
-export default SingleCitySearch;
+export default SingleCitySearch
