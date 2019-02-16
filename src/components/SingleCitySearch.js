@@ -37,10 +37,13 @@ class SingleCitySearch extends React.Component {
   }
 
   //We do so to gather new set of favourites because some of them may be deleted in Favourites section
-  componentDidMount(){
-    this.setState({
-      favourited: JSON.parse(localStorage.getItem('favouriteData'))
-    })
+  componentDidMount() {
+    if (JSON.parse(localStorage.getItem('favouriteData')) !== null)
+    {
+      this.setState({
+        favourited: JSON.parse(localStorage.getItem('favouriteData'))
+      })
+    }
   }
 
   disabledCheckFunc = elem => {if (this.state.favourited !== null) {return this.state.favourited.map(e => e.woeid).some(el => el === elem)}}; //Function to check whether city is favourited
