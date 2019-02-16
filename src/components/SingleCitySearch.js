@@ -87,7 +87,11 @@ class SingleCitySearch extends React.Component {
                 buttonName = "Favourite me!"
                 buttonDisabled={this.disabledCheckFunc(single.woeid)}
                 handleFavourite={() => {
-                  this.state.favourited.push(single);
+                  const semiData = this.state.favourited.slice();
+                  semiData.push(single);
+                  this.setState({
+                    favourited: semiData
+                  });
                   localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited)); //Here we set favourites to localStorage
                   this.setState({mustFetch: true});   //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
                 }}
