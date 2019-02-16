@@ -43,7 +43,7 @@ class SingleCitySearch extends React.Component {
     })
   }
 
-  disabledCheckFunc = elem => this.state.favourited.map(e => e.woeid).some(el => el === elem); //Function to check whether city is favourited
+  disabledCheckFunc = elem => {if (this.state.favourited !== null) {return this.state.favourited.map(e => e.woeid).some(el => el === elem)}}; //Function to check whether city is favourited
 
   /*Fetching method*/
   fetchMethod = debounce(() => {
