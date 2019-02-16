@@ -80,7 +80,6 @@ class SingleCitySearch extends React.Component {
           Click on the link to see detailed information.
         </h2>
         <input onChange={this.handleChange}/>
-        <button onClick={() => console.log(this.state.favourited)}>Show favourites</button>
         <div>
           {this.state.data.map((single) =>
             <div key = {single.woeid}>
