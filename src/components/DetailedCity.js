@@ -13,30 +13,30 @@ const DetailedCity = (
     max_temp
   }
 ) =>
-  <tbody className="detailedCity__single">          {/*Whole component*/}
-  <tr>                                              {/*Table row*/}
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+  <tbody className="detailedCity__single">
+  <tr>
+    <td className="detailedCity__single__element">
       Date: {applicable_date}
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Weather: {weather_state_name}
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Wind: {wind_direction.toFixed(1)}°
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Wind direction: {wind_direction_compass}
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Wind speed: {wind_speed.toFixed(1)}m/s
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Min temp: {min_temp.toFixed(1)}°C
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Temp: {the_temp.toFixed(1)}°C
     </td>
-    <td className="detailedCity__single__element">  {/*Table single element data*/}
+    <td className="detailedCity__single__element">
       Max temp: {max_temp.toFixed(1)}°C
     </td>
   </tr>
