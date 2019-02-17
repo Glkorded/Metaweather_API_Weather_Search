@@ -1,37 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import SingleCity from './SingleCity'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import SingleCity from "./SingleCity";
+import { Link } from "react-router-dom";
 
 const Favourites = () => {
   const [data, setData] = useState([]);
-  const [searchTitle, setSearchTitle] = useState('');
+  const [searchTitle, setSearchTitle] = useState("");
 
   /*Here I parse the localStorage*/
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('favouriteData')) !== null)
-    {
-      setData(JSON.parse(localStorage.getItem('favouriteData')))
+    if (JSON.parse(localStorage.getItem("favouriteData")) !== null) {
+      setData(JSON.parse(localStorage.getItem("favouriteData")));
     }
   }, []);
- /*Here I rewrite localStorage*/
+  /*Here I rewrite localStorage*/
   useEffect(() => {
-    localStorage.setItem('favouriteData', JSON.stringify(data));
+    localStorage.setItem("favouriteData", JSON.stringify(data));
   });
-
 
   /*input handling*/
   const handleChange = e => {
-    setSearchTitle(e.target.value)
+    setSearchTitle(e.target.value);
   };
 
   /*filter func*/
-  const filterFunction = (elem) => {
+  const filterFunction = elem => {
     if (searchTitle !== "") {
       if (elem.title.toLowerCase().includes(searchTitle.toLowerCase())) {
-        return true
+        return true;
       }
     } else {
-      return elem.title
+      return elem.title;
     }
   };
 
@@ -39,16 +37,19 @@ const Favourites = () => {
     <div>
       <h1>FAVOURITES</h1>
       <h2>
-        Here you have list of favourited cities. Feel free to search through them via input.
+        Here you have list of favourited cities. Feel free to search through
+        them via input.
       </h2>
-      <input onChange={handleChange}/>
+      <input onChange={handleChange} />
       <div>
-        {data.filter(filterFunction).map((single, index) =>
-          <div key = {single.woeid}>
-            <Link to={`../detailed_search/${single.woeid}`}>{single.title}</Link>
+        {data.filter(filterFunction).map((single, index) => (
+          <div key={single.woeid}>
+            <Link to={`../detailed_search/${single.woeid}`}>
+              {single.title}
+            </Link>
             <SingleCity
-              key = {single.woeid}
-              title = {single.title}
+              key={single.woeid}
+              title={single.title}
               location_type={single.location_type}
               woeid={single.woeid}
               latt_long={single.latt_long}
@@ -61,10 +62,10 @@ const Favourites = () => {
               }}
             />
           </div>
-        )}
+        ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default Favourites;

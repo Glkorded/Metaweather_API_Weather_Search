@@ -1,19 +1,24 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import './navigation.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import "./navigation.css";
 
-const Navigation = () =>
+const Navigation = () => (
   <div>
     <nav className="footer">
       <ul className="navigation_list">
         <li className="navigation_list_element">
-          <Link className="navigation_list_element_link" to="/">Search</Link>
+          <Link className="navigation_list_element_link" to="/">
+            Search
+          </Link>
         </li>
         <li className="navigation_list_element">
-          <Link className="navigation_list_element_link" to="/favourites/">Favourites</Link>
+          <Link className="navigation_list_element_link" to="/favourites/">
+            Favourites
+          </Link>
         </li>
       </ul>
     </nav>
-  </div>;
+  </div>
+);
 
 export default Navigation;
