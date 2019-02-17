@@ -1,7 +1,7 @@
 import React from 'react';
 import DetailedCity from "./DetailedCity";
 
-class SingleCitySearch extends React.Component {
+class DetailedCitySearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +9,7 @@ class SingleCitySearch extends React.Component {
     }
   }
 
-  fetchMethod = () => async() => {
+  fetchMethod = async () => {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'https://www.metaweather.com/api';
     try {
@@ -17,7 +17,9 @@ class SingleCitySearch extends React.Component {
       const data = await response.json();
       this.setState({detailedData: data.consolidated_weather}) //Here we gather only "consolidated_weather", originally, set of objects from API has a lot more things
     }
-    catch(error) {console.log('Error is ' + error)}
+    catch (error) {
+      console.log('Error is ' + error)
+    }
   };
 
   /*We gather the data via Router on component mounting*/
@@ -48,4 +50,4 @@ class SingleCitySearch extends React.Component {
   }
 }
 
-export default SingleCitySearch;
+export default DetailedCitySearch;

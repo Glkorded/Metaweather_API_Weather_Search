@@ -93,10 +93,10 @@ class SingleCitySearch extends React.Component {
                   const semiData = this.state.favourited.slice();
                   semiData.push(single);
                   this.setState({
-                    favourited: semiData
-                  });
-                  localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited)); //Here we set favourites to localStorage
-                  this.setState({mustFetch: true});   //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
+                    favourited: semiData,
+                    mustFetch: true  //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
+                  }, () => {localStorage.setItem('favouriteData', JSON.stringify(this.state.favourited))}); //Here we set favourites to localStorage
+                  console.log(`${single.title} was added to favourites`);
                 }}
               />
             </div>

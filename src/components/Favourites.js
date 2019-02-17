@@ -21,11 +21,6 @@ class Favourites extends React.Component {
     }
   }
 
-  /*I do so to rewrite localStorage when I unfavourite some of cities in favourite*/
-  componentWillUnmount() {
-    localStorage.setItem('favouriteData', JSON.stringify(this.state.data));
-  }
-
   /*input handling*/
   handleChange = e => {
     this.setState({
@@ -49,9 +44,7 @@ class Favourites extends React.Component {
       <div>
         <h1>FAVOURITES</h1>
         <h2>
-          Here you can type name of preferred city or part of it,
-          and Searcher will find many big cities of the world.
-          Click on the link to see detailed information.
+          Here you have list of favourited cities. Feel free to search through them via input.
         </h2>
         <input onChange={this.handleChange}/>
         <div>
@@ -71,7 +64,8 @@ class Favourites extends React.Component {
                   semiData.splice(index, 1);
                   this.setState({
                     data: semiData
-                  });
+                  }, () => {localStorage.setItem('favouriteData', JSON.stringify(this.state.data))}
+                );
                 }}
               />
             </div>
