@@ -1,5 +1,4 @@
 /*Just a simple debouncer*/
-
 export const debounce = (f, ms) => {
   let timer = null;
   return function(...args) {
@@ -13,3 +12,4 @@ export const debounce = (f, ms) => {
     timer = setTimeout(onComplete, ms);
   };
 };
+

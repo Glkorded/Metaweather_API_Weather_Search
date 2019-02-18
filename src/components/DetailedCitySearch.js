@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import DetailedCity from "./DetailedCity";
+import styled from "styled-components";
 
 const DetailedCitySearch = ({ match }) => {
+  const Table = styled.table`
+    display: flex;
+    height: 100%;
+    border: 4px solid blue;
+  `;
+
   const [detailedData, setDetailedData] = useState([]);
 
   async function fetchAPI() {
@@ -25,7 +32,7 @@ const DetailedCitySearch = ({ match }) => {
 
   return (
     <div>
-      <table className="detailedCity__whole">
+      <Table>
         {detailedData.map((
           detailed //Mapping through gathered data
         ) => (
@@ -41,7 +48,7 @@ const DetailedCitySearch = ({ match }) => {
             max_temp={detailed.max_temp}
           />
         ))}
-      </table>
+      </Table>
     </div>
   );
 };

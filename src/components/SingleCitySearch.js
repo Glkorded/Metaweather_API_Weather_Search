@@ -12,10 +12,9 @@ const SingleCitySearch = () => {
   /*Handling the input*/
   const handleChange = e => {
     setSearchTitle(e.target.value);
-    if (mustFetch !== true) {
-      //We divide this.setState to prevent setting mustFetch to true on every change in input
-      console.log("Must fetch status changed");
+    if (!mustFetch) {
       setMustFetch(true); //Here we change mustFetch status to enable fetching
+      console.log("Must fetch status changed");
     }
     fetchMethod();
   };
@@ -34,8 +33,9 @@ const SingleCitySearch = () => {
   }, []);
 
   useEffect(() => {
+    console.log("Used effect");
     localStorage.setItem("favouriteData", JSON.stringify(favourited)); //Here we set favourites to localStorage
-  });
+  }, [favourited]);
 
   const disabledCheckFunc = elem => {
     if (favourited !== null) {
@@ -63,9 +63,8 @@ const SingleCitySearch = () => {
         console.log("Error is " + error);
       }
     }
-  }, 500);
+  }, 1500);
 
-  console.log("Must fetch status is " + mustFetch);
   return (
     <div>
       <h1>SEARCH</h1>
@@ -94,7 +93,7 @@ const SingleCitySearch = () => {
                   const semiData = favourited.slice();
                   semiData.push(single);
                   setFavourited(semiData);
-                  setMustFetch(true); //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
+                  setMustFetch(false); //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
                   console.log(`${single.title} was added to favourites`);
                 }}
               />
