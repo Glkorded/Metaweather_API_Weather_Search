@@ -31,14 +31,14 @@ const DetailedCity = ({
   return (
     <TableBody>
       <TableRow>
-        <TableData>Date: {applicable_date}</TableData>
-        <TableData>Weather: {weather_state_name}</TableData>
+        <TableData>Date: {applicable_date} </TableData>
+        <TableData>Weather: {weather_state_name} </TableData>
         <TableData>Wind: {wind_direction.toFixed(1)}°</TableData>
-        <TableData>Wind direction: {wind_direction_compass}</TableData>
-        <TableData>Wind speed: {wind_speed.toFixed(1)}m/s</TableData>
-        <TableData>Min temp: {min_temp.toFixed(1)}°C</TableData>
-        <TableData>Temp: {the_temp.toFixed(1)}°C</TableData>
-        <TableData>Max temp: {max_temp.toFixed(1)}°C</TableData>
+        <TableData>Wind direction: {wind_direction_compass} </TableData>
+        <TableData>Wind speed: {wind_speed.toFixed(1)}m/s </TableData>
+        <TableData>Min temp: {min_temp.toFixed(1)}°C </TableData>
+        <TableData>Temp: {the_temp.toFixed(1)}°C </TableData>
+        <TableData>Max temp: {max_temp.toFixed(1)}°C </TableData>
       </TableRow>
     </TableBody>
   );

@@ -16,12 +16,11 @@ const SingleCitySearch = () => {
       setMustFetch(true); //Here we change mustFetch status to enable fetching
       console.log("Must fetch status changed");
     }
-    fetchMethod();
   };
 
   const setNewData = argData => {
     setData(argData);
-    setMustFetch(false); //Here we change mustFetch to false to prevent constant re-fetching
+    setMustFetch(false);
     console.log("New data set...");
   };
 
@@ -37,6 +36,10 @@ const SingleCitySearch = () => {
     localStorage.setItem("favouriteData", JSON.stringify(favourited)); //Here we set favourites to localStorage
   }, [favourited]);
 
+  useEffect(() => {
+    debounce(fetchMethod(), 1500)
+  }, [searchTitle]);
+
   const disabledCheckFunc = elem => {
     if (favourited !== null) {
       return favourited.map(e => e.woeid).some(el => el === elem);
@@ -44,11 +47,10 @@ const SingleCitySearch = () => {
   }; //Function to check whether city is favourited
 
   /*Fetching method*/
-  const fetchMethod = debounce(async () => {
+  async function fetchMethod() {
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://www.metaweather.com/api";
     if (mustFetch) {
-      //Here we use above-mentioned mustFetch to prevent constant re-fetching
       console.log("Debounce started...");
       try {
         const response = await fetch(
@@ -63,7 +65,7 @@ const SingleCitySearch = () => {
         console.log("Error is " + error);
       }
     }
-  }, 1500);
+  }
 
   return (
     <div>
