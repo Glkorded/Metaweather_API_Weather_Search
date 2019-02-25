@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleCity from "./SingleCity";
 import { Link } from "react-router-dom";
 import { debounce } from "./debounce";
+import Loading from "./Loading";
 
 const SingleCitySearch = () => {
   const [data, setData] = useState([]); //Main data
@@ -37,7 +38,7 @@ const SingleCitySearch = () => {
   }, [favourited]);
 
   useEffect(() => {
-    debounce(fetchMethod(), 1500)
+    debounce(fetchMethod(), 1500);
   }, [searchTitle]);
 
   const disabledCheckFunc = elem => {
@@ -78,7 +79,7 @@ const SingleCitySearch = () => {
       <input onChange={handleChange} />
       {!mustFetch ? (
         <div>
-          {data.map(single => (
+          {data.length !== 0 ? data.map(single => (
             <div key={single.woeid}>
               <Link to={`../detailed_search/${single.woeid}`}>
                 {single.title}
@@ -100,10 +101,10 @@ const SingleCitySearch = () => {
                 }}
               />
             </div>
-          ))}
+          )) : <div>Sorry, looks like no cities can be found with that name</div>}
         </div>
       ) : (
-        <div>Loading...</div>
+        <Loading />
       )}
     </div>
   );
