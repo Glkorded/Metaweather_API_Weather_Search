@@ -25,6 +25,27 @@ const SingleCitySearch = () => {
     console.log("New data set...");
   };
 
+  /*Fetching method*/
+  const fetchMethod = async () => {
+    const proxy = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://www.metaweather.com/api";
+    if (mustFetch) {
+      console.log("Debounce started...");
+      try {
+        const response = await fetch(
+          `${proxy}${url}/location/search/?query=${searchTitle}`
+        );
+        const data = await response.json();
+        if (data !== undefined) {
+          console.log("Data got...");
+          setNewData(data);
+        }
+      } catch (error) {
+        console.log("Error is " + error);
+      }
+    }
+  };
+
   //We do so to gather new set of favourites because some of them may be deleted in Favourites section
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("favouriteData")) !== null) {
@@ -47,27 +68,6 @@ const SingleCitySearch = () => {
     }
   }; //Function to check whether city is favourited
 
-  /*Fetching method*/
-  async function fetchMethod() {
-    const proxy = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://www.metaweather.com/api";
-    if (mustFetch) {
-      console.log("Debounce started...");
-      try {
-        const response = await fetch(
-          `${proxy}${url}/location/search/?query=${searchTitle}`
-        );
-        const data = await response.json();
-        if (data !== undefined) {
-          console.log("Data got...");
-          setNewData(data);
-        }
-      } catch (error) {
-        console.log("Error is " + error);
-      }
-    }
-  }
-
   return (
     <div>
       <h1>SEARCH</h1>
@@ -79,29 +79,33 @@ const SingleCitySearch = () => {
       <input onChange={handleChange} />
       {!mustFetch ? (
         <div>
-          {data.length !== 0 ? data.map(single => (
-            <div key={single.woeid}>
-              <Link to={`../detailed_search/${single.woeid}`}>
-                {single.title}
-              </Link>
-              <SingleCity
-                key={single.woeid}
-                title={single.title}
-                location_type={single.location_type}
-                woeid={single.woeid}
-                latt_long={single.latt_long}
-                buttonName="Favourite me!"
-                buttonDisabled={disabledCheckFunc(single.woeid)}
-                handleFavourite={() => {
-                  const semiData = favourited.slice();
-                  semiData.push(single);
-                  setFavourited(semiData);
-                  setMustFetch(false); //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
-                  console.log(`${single.title} was added to favourites`);
-                }}
-              />
-            </div>
-          )) : <div>Sorry, looks like no cities can be found with that name</div>}
+          {data.length !== 0 ? (
+            data.map(single => (
+              <div key={single.woeid}>
+                <Link to={`../detailed_search/${single.woeid}`}>
+                  {single.title}
+                </Link>
+                <SingleCity
+                  key={single.woeid}
+                  title={single.title}
+                  location_type={single.location_type}
+                  woeid={single.woeid}
+                  latt_long={single.latt_long}
+                  buttonName="Favourite me!"
+                  buttonDisabled={disabledCheckFunc(single.woeid)}
+                  handleFavourite={() => {
+                    const semiData = favourited.slice();
+                    semiData.push(single);
+                    setFavourited(semiData);
+                    setMustFetch(false); //This is quite a crotch, if we delete this line, check for favourites would happen only on re-mounting the component and won't work as needed
+                    console.log(`${single.title} was added to favourites`);
+                  }}
+                />
+              </div>
+            ))
+          ) : (
+            <div>Sorry, looks like no cities can be found with that name</div>
+          )}
         </div>
       ) : (
         <Loading />
