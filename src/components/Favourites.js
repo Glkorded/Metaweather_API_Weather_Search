@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
 import SingleCity from "./SingleCity";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Favourites = () => {
   const [data, setData] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
+
+  const Title = styled.h1`
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+  `;
+  const SubTitle = styled.h2`
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+  `;
 
   /*Here I parse the localStorage*/
   useEffect(() => {
@@ -35,11 +51,11 @@ const Favourites = () => {
 
   return (
     <div>
-      <h1>FAVOURITES</h1>
-      <h2>
+      <Title>FAVOURITES</Title>
+      <SubTitle>
         Here you have list of favourited cities. Feel free to search through
         them via input.
-      </h2>
+      </SubTitle>
       <input onChange={handleChange} />
       <div>
         {data.filter(filterFunction).map((single, index) => (

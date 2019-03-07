@@ -15,18 +15,17 @@ const DetailedCity = ({
 }) => {
   const TableBody = styled.tbody`
     display: flex;
-    justify-content: space-around;
-    height: auto;
-    width: 200px;
-    border: 2px solid red;
+    width: auto;
+    border: 2px solid gray;
   `;
-
-  const TableRow = styled.tr``;
 
   const TableData = styled.td`
     display: flex;
-    justify-content: space-around;
-    border: 1px solid green;
+    color: gray;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-decoration: none;
   `;
 
   const WeatherImage = styled.img`
@@ -35,33 +34,33 @@ const DetailedCity = ({
   `;
 
   const WindPointerImage = styled.img`
-    height: 16px;
-    width: 16px;
+    height: 24px;
+    width: 24px;
+    margin-top: 20px;
     transform: rotate(${props => props.rotateDegree}deg);
   `;
 
   return (
     <TableBody>
-      <TableRow>
-        <TableData>Date: {applicable_date} </TableData>
-        <TableData>
-          <WeatherImage
-            src={require(`../images/${weather_state_abbr}.svg`)}
-            alt={weather_state_name}
-          />
-        </TableData>
-        <TableData>
-          <WindPointerImage
-            src={require(`../images/windarrow.svg`)}
-            alt={wind_direction_compass}
-            rotateDegree={wind_direction.toFixed(0)}
-          />
-        </TableData>
-        <TableData>{wind_speed.toFixed(0)}m/s </TableData>
-        <TableData>Min temp: {min_temp.toFixed(1)}°C </TableData>
-        <TableData>Temp: {the_temp.toFixed(1)}°C </TableData>
-        <TableData>Max temp: {max_temp.toFixed(1)}°C </TableData>
-      </TableRow>
+      <TableData>Date: {applicable_date} </TableData>
+      <TableData>
+        <WeatherImage
+          src={require(`../images/${weather_state_abbr}.svg`)}
+          alt={weather_state_name}
+        />
+      </TableData>
+      <TableData>
+        Wind direction:
+        <WindPointerImage
+          src={require(`../images/windarrow.svg`)}
+          alt={wind_direction_compass}
+          rotateDegree={wind_direction.toFixed(0)}
+        />
+      </TableData>
+      <TableData>{wind_speed.toFixed(0)}m/s </TableData>
+      <TableData>Min temp: {min_temp.toFixed(1)}°C </TableData>
+      <TableData>Temp: {the_temp.toFixed(1)}°C </TableData>
+      <TableData>Max temp: {max_temp.toFixed(1)}°C </TableData>
     </TableBody>
   );
 };

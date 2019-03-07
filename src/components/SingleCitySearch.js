@@ -3,12 +3,28 @@ import SingleCity from "./SingleCity";
 import { Link } from "react-router-dom";
 import { debounce } from "./debounce";
 import Loading from "./Loading";
+import styled from "styled-components";
 
 const SingleCitySearch = () => {
   const [data, setData] = useState([]); //Main data
   const [favourited, setFavourited] = useState([]); //Favourited cities data
-  const [searchTitle, setSearchTitle] = useState(""); //State for input
-  const [mustFetch, setMustFetch] = useState(false); //Special boolean for comfortable fetching
+  const [searchTitle, setSearchTitle] = useState("City"); //State for input
+  const [mustFetch, setMustFetch] = useState(true); //Special boolean for comfortable fetching
+
+  const Title = styled.h1`
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+  `;
+  const SubTitle = styled.h2`
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+  `;
 
   /*Handling the input*/
   const handleChange = e => {
@@ -70,12 +86,12 @@ const SingleCitySearch = () => {
 
   return (
     <div>
-      <h1>SEARCH</h1>
-      <h2>
+      <Title>SEARCH</Title>
+      <SubTitle>
         Here you can type name of preferred city or part of it, and Searcher
         will find many big cities of the world. Click on the link to see
         detailed information.
-      </h2>
+      </SubTitle>
       <input onChange={handleChange} />
       {!mustFetch ? (
         <div>
@@ -87,9 +103,7 @@ const SingleCitySearch = () => {
                 </Link>
                 <SingleCity
                   key={single.woeid}
-                  title={single.title}
                   location_type={single.location_type}
-                  woeid={single.woeid}
                   latt_long={single.latt_long}
                   buttonName="Favourite me!"
                   buttonDisabled={disabledCheckFunc(single.woeid)}

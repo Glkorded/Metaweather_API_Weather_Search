@@ -5,8 +5,13 @@ import styled from "styled-components";
 const DetailedCitySearch = ({ match }) => {
   const Table = styled.table`
     display: flex;
-    height: 100%;
-    border: 4px solid blue;
+    position: absolute;
+    left: calc(50% - 356px);
+    top: calc(50% - 250px);
+    flex-direction: column;
+    background: #fffefe;
+    width: 762px;
+    border: 4px solid gray;
   `;
 
   const [detailedData, setDetailedData] = useState([]);

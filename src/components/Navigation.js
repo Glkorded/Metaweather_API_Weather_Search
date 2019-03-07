@@ -7,7 +7,7 @@ const Navigation = () => {
     margin-top: 90px;
     width: 100%;
     height: auto;
-    background-color: #41abe1;
+    background-color: transparent;
     position: fixed;
     bottom: 0;
   `;
@@ -19,11 +19,10 @@ const Navigation = () => {
   const ListElement = styled.li`
     display: inline;
     padding: 30px;
-    margin: auto;
   `;
 
   const LinkElement = styled(Link)`
-    color: antiquewhite;
+    color: gray;
     font-size: 22px;
     font-weight: bold;
     font-family: "KoHo", sans-serif;
