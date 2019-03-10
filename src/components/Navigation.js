@@ -9,6 +9,7 @@ const Navigation = () => {
     height: auto;
     background-color: transparent;
     position: fixed;
+    z-index: 1;
     bottom: 0;
   `;
 
@@ -26,9 +27,11 @@ const Navigation = () => {
     font-size: 22px;
     font-weight: bold;
     font-family: "KoHo", sans-serif;
+    color: #c88c32;
     text-decoration: none;
+    text-shadow: 0 0 1px black;
     :hover {
-      color: #006dbf;
+      color: gray;
       text-decoration: none;
     }
   `;

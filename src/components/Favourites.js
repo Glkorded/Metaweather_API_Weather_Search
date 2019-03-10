@@ -7,19 +7,53 @@ const Favourites = () => {
   const [data, setData] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
 
-  const Title = styled.h1`
-    margin: 0px;
-    color: gray;
+  const DataLink = styled(Link)`
+    font-size: 18px;
     font-weight: bold;
     font-family: "KoHo", sans-serif;
-    text-align: center;
+    text-decoration: none;
+    color: #c88c32;
   `;
-  const SubTitle = styled.h2`
+
+  const Wrapper = styled.div`
+    display: flex;
+    position: absolute;
+    left: calc(50% - 427px);
+    flex-direction: column;
+    text-align: center;
+    height: calc(100% - 61px);
+    overflow: auto;
+  `;
+
+  const Title = styled.h1`
+    position: sticky;
     margin: 0px;
     color: gray;
     font-weight: bold;
     font-family: "KoHo", sans-serif;
     text-align: center;
+    top: 0px;
+    z-index: 1;
+    background: #edeef0;
+  `;
+
+  const SubTitle = styled.h2`
+    position: sticky;
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+    top: 41px;
+    z-index: 1;
+    background: #edeef0;
+  `;
+
+  const Input = styled.input`
+    position: sticky;
+    top: 103px;
+    z-index: 1;
+    background: #edeef0;
   `;
 
   /*Here I parse the localStorage*/
@@ -50,19 +84,19 @@ const Favourites = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <Title>FAVOURITES</Title>
       <SubTitle>
         Here you have list of favourited cities. Feel free to search through
         them via input.
       </SubTitle>
-      <input onChange={handleChange} />
+      <Input onChange={handleChange} />
       <div>
         {data.filter(filterFunction).map((single, index) => (
           <div key={single.woeid}>
-            <Link to={`../detailed_search/${single.woeid}`}>
+            <DataLink to={`../detailed_search/${single.woeid}`}>
               {single.title}
-            </Link>
+            </DataLink>
             <SingleCity
               key={single.woeid}
               title={single.title}
@@ -80,7 +114,7 @@ const Favourites = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

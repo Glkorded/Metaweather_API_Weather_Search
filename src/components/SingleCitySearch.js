@@ -6,25 +6,62 @@ import Loading from "./Loading";
 import styled from "styled-components";
 
 const SingleCitySearch = () => {
+  const DataLink = styled(Link)`
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-decoration: none;
+    color: #c88c32;
+  `;
+
+  const Wrapper = styled.div`
+    display: flex;
+    position: absolute;
+    left: calc(50% - 805px);
+    flex-direction: column;
+    text-align: center;
+    height: calc(100% - 61px);
+    overflow: auto;
+  `;
+
+  const Title = styled.h1`
+    position: sticky;
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+    top: 0px;
+    z-index: 1;
+    background: #edeef0;
+  `;
+
+  const SubTitle = styled.h2`
+    position: sticky;
+    margin: 0px;
+    color: gray;
+    font-weight: bold;
+    font-family: "KoHo", sans-serif;
+    text-align: center;
+    top: 41px;
+    z-index: 1;
+    background: #edeef0;
+  `;
+
+  const Input = styled.input`
+    position: sticky;
+    top: 103px;
+    z-index: 1;
+    background: #edeef0;
+  `;
+
+  const SearchResults = styled.div`
+  `;
+
   const [data, setData] = useState([]); //Main data
   const [favourited, setFavourited] = useState([]); //Favourited cities data
   const [searchTitle, setSearchTitle] = useState("City"); //State for input
   const [mustFetch, setMustFetch] = useState(true); //Special boolean for comfortable fetching
-
-  const Title = styled.h1`
-    margin: 0px;
-    color: gray;
-    font-weight: bold;
-    font-family: "KoHo", sans-serif;
-    text-align: center;
-  `;
-  const SubTitle = styled.h2`
-    margin: 0px;
-    color: gray;
-    font-weight: bold;
-    font-family: "KoHo", sans-serif;
-    text-align: center;
-  `;
 
   /*Handling the input*/
   const handleChange = e => {
@@ -85,22 +122,22 @@ const SingleCitySearch = () => {
   }; //Function to check whether city is favourited
 
   return (
-    <div>
+    <Wrapper>
       <Title>SEARCH</Title>
       <SubTitle>
         Here you can type name of preferred city or part of it, and Searcher
         will find many big cities of the world. Click on the link to see
         detailed information.
       </SubTitle>
-      <input onChange={handleChange} />
+      <Input onChange={handleChange} />
       {!mustFetch ? (
-        <div>
+        <SearchResults>
           {data.length !== 0 ? (
             data.map(single => (
               <div key={single.woeid}>
-                <Link to={`../detailed_search/${single.woeid}`}>
+                <DataLink to={`../detailed_search/${single.woeid}`}>
                   {single.title}
-                </Link>
+                </DataLink>
                 <SingleCity
                   key={single.woeid}
                   location_type={single.location_type}
@@ -120,11 +157,11 @@ const SingleCitySearch = () => {
           ) : (
             <div>Sorry, looks like no cities can be found with that name</div>
           )}
-        </div>
+        </SearchResults>
       ) : (
         <Loading />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
