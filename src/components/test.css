@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    position: absolute;
+    left: calc(50% - 805px);
+    flex-direction: column;
+    text-align: center;
+    height: calc(100% - 61px);
+    overflow: auto;
+}
+
+.input {
+    position: sticky;
+    top: 103px;
+    z-index: 1;
+    background: #edeef0;
+}

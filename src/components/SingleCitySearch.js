@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { debounce } from "./debounce";
 import Loading from "./Loading";
 import styled from "styled-components";
+import './test.css'
 
 const SingleCitySearch = () => {
   const DataLink = styled(Link)`
@@ -14,7 +15,7 @@ const SingleCitySearch = () => {
     color: #c88c32;
   `;
 
-  const Wrapper = styled.div`
+  /*const Wrapper = styled.div`
     display: flex;
     position: absolute;
     left: calc(50% - 805px);
@@ -22,7 +23,7 @@ const SingleCitySearch = () => {
     text-align: center;
     height: calc(100% - 61px);
     overflow: auto;
-  `;
+  `;*/
 
   const Title = styled.h1`
     position: sticky;
@@ -48,15 +49,12 @@ const SingleCitySearch = () => {
     background: #edeef0;
   `;
 
-  const Input = styled.input`
+  /*const Input = styled.input`
     position: sticky;
     top: 103px;
     z-index: 1;
     background: #edeef0;
-  `;
-
-  const SearchResults = styled.div`
-  `;
+  `;*/
 
   const [data, setData] = useState([]); //Main data
   const [favourited, setFavourited] = useState([]); //Favourited cities data
@@ -122,16 +120,16 @@ const SingleCitySearch = () => {
   }; //Function to check whether city is favourited
 
   return (
-    <Wrapper>
+    <div className="wrapper">
       <Title>SEARCH</Title>
       <SubTitle>
         Here you can type name of preferred city or part of it, and Searcher
         will find many big cities of the world. Click on the link to see
         detailed information.
       </SubTitle>
-      <Input onChange={handleChange} />
-      {!mustFetch ? (
-        <SearchResults>
+      <input onChange={handleChange} className="input"/>
+        {!mustFetch ? (
+        <div>
           {data.length !== 0 ? (
             data.map(single => (
               <div key={single.woeid}>
@@ -157,11 +155,11 @@ const SingleCitySearch = () => {
           ) : (
             <div>Sorry, looks like no cities can be found with that name</div>
           )}
-        </SearchResults>
+        </div>
       ) : (
         <Loading />
       )}
-    </Wrapper>
+    </div>
   );
 };
 
