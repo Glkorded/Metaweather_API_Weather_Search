@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleCity from "./SingleCity";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "./test.css"
 
 const Favourites = () => {
   const [data, setData] = useState([]);
@@ -13,16 +14,6 @@ const Favourites = () => {
     font-family: "KoHo", sans-serif;
     text-decoration: none;
     color: #c88c32;
-  `;
-
-  const Wrapper = styled.div`
-    display: flex;
-    position: absolute;
-    left: calc(50% - 427px);
-    flex-direction: column;
-    text-align: center;
-    height: calc(100% - 61px);
-    overflow: auto;
   `;
 
   const Title = styled.h1`
@@ -45,13 +36,6 @@ const Favourites = () => {
     font-family: "KoHo", sans-serif;
     text-align: center;
     top: 41px;
-    z-index: 1;
-    background: #edeef0;
-  `;
-
-  const Input = styled.input`
-    position: sticky;
-    top: 103px;
     z-index: 1;
     background: #edeef0;
   `;
@@ -84,13 +68,13 @@ const Favourites = () => {
   };
 
   return (
-    <Wrapper>
+    <div className="wrapper">
       <Title>FAVOURITES</Title>
       <SubTitle>
         Here you have list of favourited cities. Feel free to search through
         them via input.
       </SubTitle>
-      <Input onChange={handleChange} />
+      <input onChange={handleChange} className="input"/>
       <div>
         {data.filter(filterFunction).map((single, index) => (
           <div key={single.woeid}>
@@ -114,7 +98,7 @@ const Favourites = () => {
           </div>
         ))}
       </div>
-    </Wrapper>
+    </div>
   );
 };
 
